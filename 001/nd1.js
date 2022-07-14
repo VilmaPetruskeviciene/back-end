@@ -82,4 +82,14 @@ let vid1 = 0;
 for (let i = 0; i < vid.length; i++) {
     vid1 += vid[i];
 }
-console.log(vid1 / vid.length);
+let vid2 = 0;
+let s = 0;
+for (let j = 0; j < vid.length; j++) {
+    if (vid[j] > 10 && vid[j] < 90) {
+        vid2 += vid[j];
+        s += 1;
+    }  
+}
+console.log(vid, (vid1 / vid.length), (vid2 / s));
+
+
