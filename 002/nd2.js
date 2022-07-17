@@ -6,10 +6,7 @@ function rand(min, max) {
 }
 console.log('--------1---------');
 /*Sugeneruokite masyvą iš 30 elementų (indeksai nuo 0 iki 29), kurių reikšmės yra atsitiktiniai skaičiai nuo 5 iki 25.*/
-let arr1 = [];
-for (let i = 0; i < 30; i++) {
-    arr1.push(rand(5, 25));
-}
+let arr1 = [...Array(30)].map(_ => rand(5, 25));
 console.log(arr1);
 
 console.log('--------2a---------');
@@ -24,8 +21,9 @@ console.log(a1);
 
 console.log('--------2b---------');
 /*Raskite didžiausią masyvo reikšmę ir jos indeksą;*/
-arr1.sort((a, b) => b - a);
-console.log(arr1[0]);
+let did = Math.max(...arr1);
+let ind = arr1.indexOf(Math.max(...arr1));
+console.log('Max reiksme ' + did + ' jos indeksas ' + ind);
 
 console.log('--------2c---------');
 /*Suskaičiuokite visų porinių (lyginių) indeksų reikšmių sumą;*/
@@ -73,24 +71,14 @@ console.log(arr2);
 
 console.log('--------2h---------');
 /*Suraskite pirmą (mažiausią) indeksą, kurio elemento reikšmė didesnė už 10;*/
-arr2.find((a, i) => {
-    if (a > 10) {
-        console.log(i);
-    }
-})
+let bigger = arr2.findIndex(a => a > 10);
+console.log(bigger);
 
 console.log('--------3---------');
 /*Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis 200. Suskaičiuokite kiek yra kiekvienos raidės.*/
-function random() {
-    let text = [];
-    let possible = 'ABCD';
-    for (let i = 0; i < 200; i++) {
-      text.push(possible.charAt(Math.floor(Math.random() * possible.length)));
-    }
-    return text;
-}
 
-let letters = random();
+let possible = ['A', 'B', 'C', 'D'];
+let letters = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
 console.log(letters);
 
 let aa = 0;
@@ -103,6 +91,19 @@ console.log(`A = ${aa}, B = ${bb}, C = ${cc}, D = ${dd},`);
 
 console.log('--------4---------');
 /*Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.*/
+let mas1 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+console.log(mas1);
+let mas2 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+console.log(mas2);
+let mas3 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+console.log(mas3);
+
+let masBendr = [];
+mas1.map((a, i) => masBendr.push(mas1[i] + mas2[i] + mas3[i]));
+console.log(masBendr);
+
+let uniq = [...new Set(masBendr)];
+console.log(uniq, uniq.length);
 
 console.log('--------5---------');
 /*Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999. Masyvų ilgiai 100. Masyvų reikšmės turi būti unikalios savo masyve (t.y. neturi kartotis).*/
@@ -159,3 +160,51 @@ arr9.map((a, i, t) => {
     }
 })
 console.log(arr9);
+
+
+
+console.log('----Javasript tarpinio žinių patikrinimo testas1----');
+
+/*
+Duotas toks vardų masyvas:
+const girls = ['Brigita', 'Edita', 'Deimantė', 'Justė', 'Ona', 'Bronė', 'Ramunė', 'Kaštonė', 'Meilutė'];
+*/
+const girls = ['Brigita', 'Edita', 'Deimantė', 'Justė', 'Ona', 'Bronė', 'Ramunė', 'Kaštonė', 'Meilutė'];
+console.log('--------1---------');
+/*Sukurkite masyvą cats iš 10 elementų, kurių reikšmės atsitiktiniai skaičiai nuo 2 iki 12;
+Sukurkite masyvą owners iš 10 elementų, kurių reikšmės atsitiktiniai vardai iš masyvo girls. Vardai gali kartotis. Masyvus atspausdinkite su console.log();*/
+const cats = [...Array(10)].map(_ => rand(2, 12));
+console.log(cats);
+
+let owners = [...Array(10)].map(_ => girls[rand(0, girls.length - 1)]);
+console.log(owners);
+
+console.log('--------2---------');
+/*Suskaičiuokite kiek katinukų yra cats masyve (suraskite masyvo narių sumą). Sumuokite tik tas katinukų reikšmes, kurios be liekanos dalijasi iš 3. Rezultatą atspausdinkite su console.log();*/
+let sumCats = 0;
+cats.forEach(a => {
+    if (a % 3 === 0) {
+        sumCats += 1;
+    }
+})
+console.log(sumCats);
+
+console.log('--------3---------');
+/*Į masyvo owners pradžią, t.y. elementą su indeksu 0 (o ne galą!, o pridėkite papildomai, o neužrašykite ant mergaitės!) pridėkite vardą 'Nausėda'. Masyvas po pridėjimo turi turėti 11 elementų;*/
+owners.unshift('Nausėda');
+console.log(owners);
+
+console.log('--------4---------');
+/*Sukurkite trečią masyvą catOwners, kurio reikšmė yra stringas, sudarytas iš vardo ir katinukų skaičiaus (pvz Deimantė has 2 cats), naudodami masyvus cats ir owners pagal taisyklę: pirmai mergaitei iš owners masyvo priskiriamas pirmas katinukų skaičius iš cats masyvo, antrai - antras ir t.t. Atkreipkite dėmesį, kad pirma mergaitė owners masyve yra ne pirmas elementas su indeksu 0 (pirmas yra 'Nausėda'), o antrasis su indeksu 1. Pirmas katinukų skaičius cats masyve yra standartiškai su indeksu 0. Masyvą atspausdinkite su console.log();*/
+let catOwners = [];
+owners.map((a, i) => {
+    if (i !== 0) {
+        catOwners.push(`${a} has ${cats[i - 1]} cats.`)
+    }
+})
+console.log(catOwners);
+
+console.log('--------5---------');
+/*Suraskite vieną (tik vieną) vardą owners masyve, kuris kartojasi (nesvarbu kiek kartų) ir jį atspausdinkite su console.log().*/
+let owner = owners.filter((a, i) => owners.indexOf(a) !== i);
+console.log(owner);
