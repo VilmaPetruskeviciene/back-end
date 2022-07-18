@@ -67,3 +67,29 @@ console.log(pinigine);
 
 console.log('--------8-------');
 /*Naudojant 1 uždavinio masyvą iš jo reikšmių sukurti dar du papildomus masyvus. Į vieną iš 1 uždavinio masyvo pridėti reikšmes mažesnes arba lygias 2 (monetas), o į kitą didesnes nei 2 (popierinius pinigus);*/
+let pinigine1 = [];
+let pinigine2 = [];
+pinigine.forEach(a => {
+    if (a <= 2) {
+        pinigine1.push(a);
+    } else {
+        pinigine2.push(a);
+    }
+})
+console.log(pinigine1);
+console.log(pinigine2);
+
+console.log('--------9-------');
+/*Sukurti masyvą (piniginę su dviem skyreliais) iš dviejų elementų, kurio pirmas elementas būtų masyvas iš 8 uždavinio su monetom, o antras elementas masyvas iš 8 uždavinio su popieriniais pinigais;*/
+let pinigine2sk = [pinigine1, pinigine2];
+console.log(pinigine2sk);
+
+console.log('--------10-------');
+/*Į 9 uždavinio masyvą, piniginę su dviem skyreliais, pridėti trečią skyrelį- masyvą su kortelėm: ['KIKA', 'Euro Vaistinė', 'Drogas', 'Ačiū', 'Lietuvos Geležinkeliai', 'Mano RIMI'];*/
+let korteles = [];
+korteles.push('KIKA', 'Euro Vaistinė', 'Drogas', 'Ačiū', 'Lietuvos Geležinkeliai', 'Mano RIMI');
+pinigine2sk[2] = korteles;
+console.log(pinigine2sk);
+
+console.log('--------11-------');
+/*Korteles skyrelyje sudėlioti (išrūšiuoti) pagal abėcėlę;*/
