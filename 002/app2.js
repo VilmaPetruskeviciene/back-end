@@ -89,3 +89,10 @@ console.log(namas2);
 namas2.sort((a, b) => a.localeCompare(b));
 console.log(namas2);
 
+/*
+const [a, b] = [5, 7];
+const a = [5, 7][0];
+const b = [5, 7][1];
+
+const {a, bla, id} = {bla:12, id:45};
+*/

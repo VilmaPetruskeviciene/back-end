@@ -12,11 +12,12 @@ console.log(arr1);
 console.log('--------2a---------');
 /*Suskaičiuokite kiek masyve yra reikšmių didesnių už 10;*/
 let a1 = 0;
-arr1.forEach(a => {
+/*arr1.forEach(a => {
     if (a > 10) {
       a1 += 1;  
     }
-});
+});*/
+arr1.forEach(a => a > 10 ? a1 += 1 : null);
 console.log(a1);
 
 console.log('--------2b---------');
@@ -29,12 +30,14 @@ console.log('--------2c---------');
 /*Suskaičiuokite visų porinių (lyginių) indeksų reikšmių sumą;*/
 let sum = 0;
 arr1.forEach((a, i) => {
-    if (i === 0 || i % 2 === 0) {
+    if (i % 2 === 0) {
         sum += a;
     }
 })
 console.log(sum);
-
+/*
+console.log(arr1.filter((_, i) => i % 2 === 0).reduce((a, b) => a + b));
+*/
 console.log('--------2d---------');
 /*Sukurkite naują masyvą, kurio reikšmės yra 1 uždavinio masyvo reikšmes minus tos reikšmės indeksas;*/
 let arr2 =arr1.map((a, i) => a - i);
@@ -46,7 +49,9 @@ for (let i = 0; i < 10; i++) {
     arr2.push(rand(5, 25))   
 }
 console.log(arr2);
-
+/*
+arr2.push(...([...Aray(10)].map(_ => rand(5, 25))));
+*/
 console.log('--------2f---------');
 /*Iš masyvo elementų sukurkite du naujus masyvus. Vienas turi būti sudarytas iš neporinių indeksų reikšmių, o kitas iš porinių (pagal neporinį-porinį indeksą, ne reikšmę);*/
 arr3 = [];
@@ -73,12 +78,17 @@ console.log('--------2h---------');
 /*Suraskite pirmą (mažiausią) indeksą, kurio elemento reikšmė didesnė už 10;*/
 let bigger = arr2.findIndex(a => a > 10);
 console.log(bigger);
-
+/*
+mas = [2, 100, 8, 18];
+let i = -1;
+while (i < mas.length && mas[++i] <= 10)
+console.log(i > mas.length - 1 ? -1 : i);
+*/
 console.log('--------3---------');
 /*Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis 200. Suskaičiuokite kiek yra kiekvienos raidės.*/
 
 let possible = ['A', 'B', 'C', 'D'];
-let letters = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+let letters = [...Array(200)].map(_ => possible[rand(0, possible.length - 1)]);
 console.log(letters);
 
 let aa = 0;
@@ -91,15 +101,15 @@ console.log(`A = ${aa}, B = ${bb}, C = ${cc}, D = ${dd},`);
 
 console.log('--------4---------');
 /*Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.*/
-let mas1 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+let mas1 = [...Array(200)].map(_ => possible[rand(0, possible.length - 1)]);
 console.log(mas1);
-let mas2 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+let mas2 = [...Array(200)].map(_ => possible[rand(0, possible.length - 1)]);
 console.log(mas2);
-let mas3 = [...Array(200)].map(a => possible[rand(0, possible.length - 1)]);
+let mas3 = [...Array(200)].map(_ => possible[rand(0, possible.length - 1)]);
 console.log(mas3);
 
 let masBendr = [];
-mas1.map((a, i) => masBendr.push(mas1[i] + mas2[i] + mas3[i]));
+mas1.map((_, i) => masBendr.push(mas1[i] + mas2[i] + mas3[i]));
 console.log(masBendr);
 
 let uniq = [...new Set(masBendr)];
@@ -146,6 +156,8 @@ console.log(arr65);
 console.log('--------8---------');
 /*Sugeneruokite masyvą, kurio indeksus sudarytų pirmo 5 uždavinio masyvo reikšmės, o jo reikšmės iš būtų antrojo masyvo.*/
 let arr8 = [];
+arr5.forEach((a, i) => arr8.push(arr5[i] = arr6[a]));
+console.log(arr8);
 
 console.log('--------9---------');
 /*Sugeneruokite 10 skaičių masyvą pagal taisyklę: Du pirmi skaičiai- atsitiktiniai nuo 5 iki 25. Trečias, pirmo ir antro suma. Ketvirtas- antro ir trečio suma. Penktas trečio ir ketvirto suma ir t.t.*/
@@ -182,11 +194,7 @@ console.log(owners);
 console.log('--------2---------');
 /*Suskaičiuokite kiek katinukų yra cats masyve (suraskite masyvo narių sumą). Sumuokite tik tas katinukų reikšmes, kurios be liekanos dalijasi iš 3. Rezultatą atspausdinkite su console.log();*/
 let sumCats = 0;
-cats.forEach(a => {
-    if (a % 3 === 0) {
-        sumCats += 1;
-    }
-})
+cats.forEach(a => a % 3 === 0 ? sumCats += 1 : null);
 console.log(sumCats);
 
 console.log('--------3---------');
@@ -206,5 +214,6 @@ console.log(catOwners);
 
 console.log('--------5---------');
 /*Suraskite vieną (tik vieną) vardą owners masyve, kuris kartojasi (nesvarbu kiek kartų) ir jį atspausdinkite su console.log().*/
-let owner = owners.filter((a, i) => owners.indexOf(a) !== i);
-console.log(owner);
+let owner = [];
+owner = owners.filter(a => owners.indexOf(a) !== owners.lastIndexOf(a) ? owner.push(a) : null);
+console.log(owner[0]);
