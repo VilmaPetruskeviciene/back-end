@@ -93,3 +93,68 @@ console.log(pinigine2sk);
 
 console.log('--------11-------');
 /*Korteles skyrelyje sudėlioti (išrūšiuoti) pagal abėcėlę;*/
+pinigine2sk[2].sort((a, b) => a.localeCompare(b));
+console.log(pinigine2sk[2]);
+
+console.log('--------12-------');
+/*Į kortelių skyrelį pridėti mokėjimo kortelių 'MasterCard', 'Visa' (su rand generuokite atsitiktines reikšmes 'MasterCard' arba 'Visa' ir rašykite į masyvą) iš skirtingų bankų tiek, kad skyrelis (masyvo ilgis) pasidarytų lygus 20;*/
+let bankoKort = ['MasterCard', 'Visa'];
+pinigine2sk[2].push(...([...Array(14)].map(_ => bankoKort[rand(0, bankoKort.length-1)])));
+console.log(pinigine2sk[2]);
+
+console.log('--------13-------');
+/*Paskaičiuokite, kokio tipo kortelių ('MasterCard' arba 'Visa') yra daugiau;*/
+let MasterCard = 0;
+let Visa = 0;
+pinigine2sk[2].forEach(a => a === 'MasterCard' ? MasterCard += 1 : a === 'Visa' ? Visa += 1 : null);
+console.log('MasterCard: ' + MasterCard + ' Visa: ' + Visa);
+
+console.log('--------14-------');
+/*Sukurkite masyve (piniginėje) ketvirtą elementą (skyrelį) į kurį įdėkite 10 loterijos bilietų, kurių numerius sugeneruokite atsitiktinai su rand funkcija nuo 1000000000 iki 9999999999;*/
+let loterija = [...Array(10)].map(_ => rand(1000000000, 9999999999));
+pinigine2sk[3] = loterija;
+
+console.log(pinigine2sk);
+
+console.log('--------15-------');
+/*Loterijos bilietų masyvą išrūšiuoti nuo didžiausio numerio iki mažiausio;*/
+loterija.sort((a, b) => b - a);
+console.log(loterija);
+
+console.log('--------16-------');
+/*Į piniginės popierinių pinigų skyrelį įdėti 500 pinigų mažom kupiūrom ( generuoti atsitiktinius skaičius nuo 3 iki 10 ir dėti kaip naujus elementus, kol įdėta suma bus lygi 500);*/
+let pinigai = [rand(3, 10)];
+while (pinigai.reduce((a, b) => a + b) < 484) {
+    pinigai.push(rand(3, 10));
+}
+while (pinigai.reduce((a, b) => a + b) < 510) {
+    let x = rand(3, 10);
+    let y = rand(3, 10);
+    if (pinigai.reduce((a, b) => a + b) + (x + y) === 500) {
+        pinigai.push(x, y);
+        break;
+    } else {
+        continue;
+    }
+}
+console.log(pinigai);
+console.log(pinigai.reduce((a, b) => a + b));
+
+console.log('--------17-------');
+/*Patikrinti ar ką nors laimėjote. Bilieto numerius dalinkite iš 777 ir jeigu numeris išsidalins be liekanos - jūs laimėjote! Suskaičiuokite, kiek buvo laimingų bilietų.*/
+let laim = 0;
+loterija.forEach(a => {
+    if (a % 777 === 0) {
+        laim += 1;
+    }
+})
+console.log(laim);
+
+console.log('--------18-------');
+/*Sukurkite penktą skyrelį ir į jį sudėkite nuotraukas: ['šuo', 'katė', 'automobilis', 'namas', 'kiemas'] ir jas išrūšiuokite pagal žodžių ilgį taip, kad pirma eitų trumpiausi žodžiai;*/
+let nuotraukos = [];
+nuotraukos.push('šuo', 'katė', 'automobilis', 'namas', 'kiemas');
+pinigine2sk[4] = nuotraukos;
+nuotraukos.sort((a, b) => a.length - b.length);
+console.log(nuotraukos);
+

@@ -12,11 +12,6 @@ console.log(arr1);
 console.log('--------2a---------');
 /*Suskaičiuokite kiek masyve yra reikšmių didesnių už 10;*/
 let a1 = 0;
-/*arr1.forEach(a => {
-    if (a > 10) {
-      a1 += 1;  
-    }
-});*/
 arr1.forEach(a => a > 10 ? a1 += 1 : null);
 console.log(a1);
 
@@ -98,7 +93,11 @@ let dd = 0;
 
 letters.forEach(a => a === 'A' ? aa += 1 : a === 'B' ? bb += 1 : a === 'C' ? cc += 1 : dd += 1);
 console.log(`A = ${aa}, B = ${bb}, C = ${cc}, D = ${dd},`);
-
+/*
+const mas = [...Array(200)].map(_ => ['A', 'B', 'C', 'D'][rand(0, 3)]);
+const rez = {A: 0, B: 0, C: 0, D: 0};
+mas.forEach(a => rez[a]++);
+*/
 console.log('--------4---------');
 /*Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.*/
 let mas1 = [...Array(200)].map(_ => possible[rand(0, possible.length - 1)]);
@@ -112,9 +111,21 @@ let masBendr = [];
 mas1.map((_, i) => masBendr.push(mas1[i] + mas2[i] + mas3[i]));
 console.log(masBendr);
 
+let unik = 0;
+masBendr.forEach((a, i) => {
+    if (masBendr.indexOf(a) === i) {
+        unik += 1;
+    }
+})
+console.log(unik);
+
 let uniq = [...new Set(masBendr)];
 console.log(uniq, uniq.length);
-
+/*
+const ages = [26, 27, 26, 26, 28, 28, 29, 29, 30];
+const uniqueAges = ages.filter((x, i, a) => a.indexOf(x) == i);
+console.log(uniqueAges);
+*/
 console.log('--------5---------');
 /*Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999. Masyvų ilgiai 100. Masyvų reikšmės turi būti unikalios savo masyve (t.y. neturi kartotis).*/
 let arr5 = [];
@@ -132,12 +143,29 @@ for (let j = 0; j < 100; j++) {
     }  
 }
 console.log(arr6);
+/*
+console.log('-----------------');
+const m1 = new Set();
+while (m1.size < 100) {
+    m1.add(rand(100, 999))
+}
+let mas11 = [...m1];
+console.log(mas11);
 
+const m2 = new Set();
+while (m2.size < 100) {
+    m2.add(rand(100, 999))
+}
+let mas12 = [...m2];
+console.log(mas12);
+*/
 console.log('--------6---------');
 /*Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių, kurios yra pirmame 5 uždavinio masyve, bet nėra antrame 5 uždavinio masyve.*/
 let arr56 = [];
-arr5.map((a, i) => {
-    if (a !== arr6[i]) {
+arr5.forEach(a => {
+    if (arr6.includes(a)) {
+        
+    } else {
         arr56.push(a);
     }
 })
@@ -146,8 +174,8 @@ console.log(arr56);
 console.log('--------7---------');
 /*Sugeneruokite masyvą iš elementų, kurie kartojasi abiejuose 5 uždavinio masyvuose.*/
 let arr65 = [];
-arr5.map((a, i) => {
-    if (a === arr6[i]) {
+arr5.forEach(a => {
+    if (arr6.includes(a)) {
         arr65.push(a);
     }
 })
@@ -156,7 +184,9 @@ console.log(arr65);
 console.log('--------8---------');
 /*Sugeneruokite masyvą, kurio indeksus sudarytų pirmo 5 uždavinio masyvo reikšmės, o jo reikšmės iš būtų antrojo masyvo.*/
 let arr8 = [];
-arr5.forEach((a, i) => arr8.push(arr5[i] = arr6[a]));
+for (let i = 0; i < arr5.length; i++) {
+    arr8[arr5[i]] = arr6[i];
+}
 console.log(arr8);
 
 console.log('--------9---------');
@@ -194,7 +224,7 @@ console.log(owners);
 console.log('--------2---------');
 /*Suskaičiuokite kiek katinukų yra cats masyve (suraskite masyvo narių sumą). Sumuokite tik tas katinukų reikšmes, kurios be liekanos dalijasi iš 3. Rezultatą atspausdinkite su console.log();*/
 let sumCats = 0;
-cats.forEach(a => a % 3 === 0 ? sumCats += 1 : null);
+cats.forEach(a => a % 3 === 0 ? sumCats += a : null);
 console.log(sumCats);
 
 console.log('--------3---------');
@@ -214,6 +244,11 @@ console.log(catOwners);
 
 console.log('--------5---------');
 /*Suraskite vieną (tik vieną) vardą owners masyve, kuris kartojasi (nesvarbu kiek kartų) ir jį atspausdinkite su console.log().*/
+/*
 let owner = [];
 owner = owners.filter(a => owners.indexOf(a) !== owners.lastIndexOf(a) ? owner.push(a) : null);
 console.log(owner[0]);
+*/
+let owner1 = owners.find(a => owners.indexOf(a) !== owners.lastIndexOf(a));
+console.log(owner1);
+
