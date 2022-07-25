@@ -139,7 +139,24 @@ while (pinigai.reduce((a, b) => a + b) < 510) {
 }
 console.log(pinigai);
 console.log(pinigai.reduce((a, b) => a + b));
-
+/*
+const pin = [105, 107];
+let sum;
+do {
+    const random = rand(3, 10);
+    sum = pin.reduce((a, b) => a + b);
+    if (random + sum > 497) {
+        continue;
+    }
+    pin.push(random);
+} while(500 - sum > 10);
+pin.push(0);
+do {
+    const random = rand(3, 10);
+    pin[pin.length - 1] = random;
+} while(pin.reduce((a, b) => a + b) != 500);
+console.log(pin.reduce((a, b) => a + b));
+*/
 console.log('--------17-------');
 /*Patikrinti ar ką nors laimėjote. Bilieto numerius dalinkite iš 777 ir jeigu numeris išsidalins be liekanos - jūs laimėjote! Suskaičiuokite, kiek buvo laimingų bilietų.*/
 let laim = 0;
